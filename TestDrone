@@ -1,0 +1,289 @@
+package p340174986;
+
+/**
+ * @author Rafal Hejnicki
+ */
+
+import static org.junit.Assert.*;
+
+/**
+ * Junit test class to test the Drone class for number of validations and functioning methods
+ */
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class TestDrone {
+
+	/**
+	 * initialise the test data
+	 * 
+	 */
+
+	String validColour, invalidColour, validName, invalidName;
+	double currentHeightLowerValid, currentHeightMiddleValid, currentHeightUpperValid, currentHeightLowerInvalid,
+			currentHeightUpperInvalid;
+	int numberOfBatteriesValidLower, numberOfBatteriesValidMiddle, numberOfBatteriesValidUpper,
+			numberOfBatteriesInvalidLower, numberOfBatteriesInvalidUpper;
+
+	@Before
+	public void setUp() throws Exception {
+		/**
+		 * Assigning of the values to the test data for the test cases
+		 */
+
+		validName = "good name";
+		currentHeightMiddleValid = 2.2;
+		currentHeightLowerValid = 1.00;
+		numberOfBatteriesValidMiddle = 2;
+		validColour = "Red";
+		invalidName = "";
+		numberOfBatteriesValidLower = 0;
+		numberOfBatteriesValidMiddle = 2;
+		numberOfBatteriesValidUpper = 3;
+		numberOfBatteriesInvalidLower = -1;
+		numberOfBatteriesInvalidUpper = 4;
+		currentHeightLowerValid = 0.0;
+		currentHeightMiddleValid = 2.2;
+		currentHeightUpperValid = 4.5;
+		currentHeightLowerInvalid = -0.1;
+		currentHeightUpperInvalid = 4.51;
+	}
+
+	/**
+	 * test default constructor is not null
+	 */
+
+	@Test
+	public void testDroneNotNull() {
+		Drone drone = new Drone();
+		assertNotNull(drone);
+	}
+
+	/**
+	 * test constructor with parameters not null
+	 */
+
+	@Test
+	public void testDroneConstructorWithParamNotNull() {
+		Drone drone = new Drone(validName, currentHeightMiddleValid, numberOfBatteriesValidMiddle, validColour);
+		assertNotNull(drone);
+	}
+
+	/**
+	 * test for parameters being initialised and match the entered data
+	 */
+
+	@Test
+	public void testDroneConstructorWithParamForHappypath() {
+		Drone drone = new Drone("name", currentHeightLowerValid, numberOfBatteriesValidMiddle, validColour);
+		assertEquals("name", drone.getName());
+		/**
+		 * difference allowed between actual and expected is set to 0.
+		 */
+		assertEquals(currentHeightLowerValid, drone.getCurrentHeight(), 0);
+		assertEquals(numberOfBatteriesValidMiddle, drone.getNumberOfBatteries());
+		assertEquals(numberOfBatteriesValidMiddle, drone.getNumberOfBatteries());
+		assertEquals(validColour, drone.getColour());
+
+	}
+	/**
+	 * test for valid colour Red
+	 */
+
+	@Test
+	public void testGetColourForRed() {
+		
+		Drone drone = new Drone();
+		drone.setColour("Red");
+		assertEquals("Red", drone.getColour());
+		
+	}
+	
+	/**
+	 * test for valid colour Green
+	 */
+
+	@Test
+	public void testGetColourForGreen() {
+		
+		Drone drone = new Drone();
+		drone.setColour("Green");
+		assertEquals("Green", drone.getColour());
+		
+	}
+	
+	/**
+	 * test for any other input than Red or Green
+	 */
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetColourForInvalidColour() {
+
+		Drone drone = new Drone();
+		drone.setColour("Black");
+
+	}
+
+	/**
+	 * test for name getter and setter method to make sure its not null
+	 */
+
+	@Test
+	public void testGetNameNotNull() {
+		Drone drone = new Drone();
+		drone.setName("validName");
+		assertNotNull(drone.getName());
+	}
+
+	/**
+	 * test for name value to match setter and getter equal values
+	 */
+
+	@Test
+	public void testGetNameHappyPath() {
+		Drone drone = new Drone();
+		drone.setName("abc");
+		assertEquals("abc", drone.getName());
+	}
+
+	/**
+	 * test for number of batteries not null
+	 */
+	@Test
+	public void testGetNumberOfBatteriesNotNull() {
+		Drone drone = new Drone();
+		drone.setNumberOfBatteries(2);
+		assertNotNull(drone.getNumberOfBatteries());
+	}
+
+	/**
+	 * test for lower valid range of batteries = 0
+	 */
+
+	@Test
+	public void testGetNumberOfBatteriesValidLower() {
+		Drone drone = new Drone();
+		drone.setNumberOfBatteries(numberOfBatteriesValidLower);
+		assertEquals(numberOfBatteriesValidLower, drone.getNumberOfBatteries());
+	}
+
+	/**
+	 * extra test for middle valid value for number of batteries value = 2
+	 */
+	@Test
+	public void testGetNumberOfBatteriesValidMiddle() {
+		Drone drone = new Drone();
+		drone.setNumberOfBatteries(numberOfBatteriesValidMiddle);
+		assertEquals(numberOfBatteriesValidMiddle, drone.getNumberOfBatteries());
+	}
+
+	/**
+	 * extra test for upper valid value for number of batteries value = 3
+	 */
+	@Test
+	public void testGetNumberOfBatteriesValidUpper() {
+		Drone drone = new Drone();
+		drone.setNumberOfBatteries(numberOfBatteriesValidUpper);
+		assertEquals(numberOfBatteriesValidUpper, drone.getNumberOfBatteries());
+	}
+
+	/**
+	 * test for invalid value lower range in batteries value = -1
+	 */
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetNumberOfBatteriesInvalidLower() {
+		Drone drone = new Drone();
+		drone.setNumberOfBatteries(numberOfBatteriesInvalidLower);
+
+	}
+
+	/**
+	 * test for invalid value upper range in batteries value = 4
+	 */
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetNumberOfBatteriesInvalidUpper() {
+		Drone drone = new Drone();
+		drone.setNumberOfBatteries(numberOfBatteriesInvalidUpper);
+
+	}
+
+	/**
+	 * test for curreent height not null
+	 */
+
+	@Test
+	public void testGetCurrentHeightNotNull() {
+		Drone drone = new Drone();
+		drone.setCurrentHeight(currentHeightMiddleValid);
+	}
+
+	/**
+	 * test for current height lower valid value with difference tolerance of 0
+	 */
+
+	@Test
+	public void testGetCurrentHeightLowerValidValue() {
+		Drone drone = new Drone();
+		drone.setCurrentHeight(currentHeightLowerValid);
+		assertEquals(currentHeightLowerValid, drone.getCurrentHeight(), 0);
+	}
+
+	/**
+	 * test for current height middle valid value with difference tolerance of 0
+	 */
+
+	@Test
+	public void testGetCurrentHeightMiddleValidValue() {
+		Drone drone = new Drone();
+		drone.setCurrentHeight(currentHeightMiddleValid);
+		assertEquals(currentHeightMiddleValid, drone.getCurrentHeight(), 0);
+	}
+
+	/**
+	 * test for current height upper valid value with difference tolerance of 0
+	 */
+
+	@Test
+	public void testGetCurrentHeightUpperValidValue() {
+		Drone drone = new Drone();
+		drone.setCurrentHeight(currentHeightUpperValid);
+		assertEquals(currentHeightUpperValid, drone.getCurrentHeight(), 0);
+	}
+
+	/**
+	 * test for current height lower invalid value being not accepted and
+	 * exception thrown
+	 */
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetCurrentInvalidLowerValue() {
+		Drone drone = new Drone();
+		drone.setCurrentHeight(currentHeightLowerInvalid);
+	}
+
+	/**
+	 * test for current height upper invalid value being not accepted and
+	 * exception thrown
+	 */
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetCurrentInvalidUpperValue() {
+		Drone drone = new Drone();
+		drone.setCurrentHeight(currentHeightUpperInvalid);
+	}
+	/**
+	 * test case for drone to land and set value to 0.0 with error margin of 0
+	 */
+
+	@Test
+	public void testEmergencyLand() {
+		Drone drone = new Drone();
+		drone.emergencyLand();
+		assertEquals(0.0, drone.getCurrentHeight(),0);
+	}
+	
+	
+}
